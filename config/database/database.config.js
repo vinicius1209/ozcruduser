@@ -2,14 +2,14 @@ import sqlite3Source from "sqlite3";
 
 const sqlite3 = sqlite3Source.verbose();
 
-const dbPath = process.env.DATABASE_PATH || "config/components/db.sqlite";
+const dbPath = process.env.NODE_ENV === 'test' ? ':memory:' : (process.env.DATABASE_PATH || "config/database/db.sqlite");
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.log("Erro ao inicializar o DB: ", err.message);
     return false;
   }
-  console.log("Conectado ao banco de dados SQLite.");
+  console.log("Conectado ao banco de dados SQLite : ", dbPath);
   return true;
 });
 

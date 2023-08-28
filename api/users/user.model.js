@@ -1,10 +1,10 @@
-import db from "../../config/components/database.config.js";
+import db from "../../config/database/database.config.js";
 
 function insert(nome, email, idade) {
   const query = "INSERT INTO user (nome, email, idade) VALUES (?, ?, ?)";
 
   return new Promise((resolve, reject) => {
-    db.run(query, [nome, email, idade], (err) => {
+    db.run(query, [nome, email, idade], function (err) {
       if (err) {
         reject(err);
       } else {
@@ -29,7 +29,7 @@ function getById(id) {
 }
 
 function getAll(pageSize, offSet) {
-  const query = "SELECT * FROM user LIMIT ? OFFSET ?";
+  const query = "SELECT * FROM user ORDER BY id LIMIT ? OFFSET ?";
 
   return new Promise((resolve, reject) => {
     db.all(query, [pageSize, offSet], (err, rows) => {

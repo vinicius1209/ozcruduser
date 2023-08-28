@@ -64,7 +64,7 @@ async function addUser(ctx) {
   if (validationResult.error) {
     ctx.status = 400;
     ctx.body = {
-      message: "Validação falhou",
+      message: "Validação falhou.",
       errors: validationResult.error.details.map((detail) => detail.message),
     };
     return;
@@ -90,14 +90,6 @@ async function addUser(ctx) {
 
 async function deleteUser(ctx) {
   const { id } = ctx.params;
-
-  if (!id) {
-    ctx.status = 400;
-    ctx.body = {
-      message: "ID do usuário é necessário.",
-    };
-    return;
-  }
 
   try {
     // Verificar se o usuário existe
@@ -126,6 +118,7 @@ async function deleteUser(ctx) {
 
 async function editUser(ctx) {
   const { id } = ctx.params;
+
   const { nome, email, idade } = ctx.request.body;
 
   if (!id || !nome || !email || typeof idade === "undefined") {
@@ -135,6 +128,18 @@ async function editUser(ctx) {
     };
     return;
   }
+
+  const validationResult = userSchema.validate(ctx.request.body);
+
+  if (validationResult.error) {
+    ctx.status = 400;
+    ctx.body = {
+      message: "Validação falhou.",
+      errors: validationResult.error.details.map((detail) => detail.message),
+    };
+    return;
+  }
+
 
   try {
     // Verificar se o usuário existe
