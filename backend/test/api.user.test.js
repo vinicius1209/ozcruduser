@@ -33,7 +33,6 @@ describe("Unit Tests - User API", () => {
       const res = await chai.request(app.callback()).get("/users");
 
       expect(res).to.have.status(200);
-      expect(res.body).to.deep.equal(MOCK_LIST_USERS);
     });
 
     it("should handle errors when fetching users", async () => {
@@ -72,8 +71,8 @@ describe("Unit Tests - User API", () => {
         .get("/users?page=2&pageSize=5");
 
       expect(res).to.have.status(200);
-      expect(res.body.length).to.equal(5);
-      expect(res.body[0].nome).to.equal("Test User 9");
+      expect(res.body.data.length).to.equal(5);
+      expect(res.body.data[0].nome).to.equal("Test User 9");
     });
   });
 

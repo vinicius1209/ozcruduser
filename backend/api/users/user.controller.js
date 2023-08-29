@@ -6,6 +6,7 @@ import {
   deleteById,
   update,
   entityExistis,
+  getTotalUsers,
 } from "./user.model.js";
 
 async function getAllUsers(ctx) {
@@ -16,8 +17,16 @@ async function getAllUsers(ctx) {
     const offset = (page - 1) * pageSize;
 
     const users = await getAll(pageSize, offset);
+    const totalUsers = await getTotalUsers(); 
+    const totalPages = Math.ceil(totalUsers / pageSize);
+
     ctx.status = 200;
-    ctx.body = users;
+    ctx.body = {
+      data: users,
+      pages: totalPages,
+      page,
+      pageSize
+    }
   } catch (err) {
     ctx.status = 500;
     ctx.body = {

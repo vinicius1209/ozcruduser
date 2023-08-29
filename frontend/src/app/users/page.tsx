@@ -1,12 +1,15 @@
-"use client"
+"use client";
 
-import UserTable from "@/components/molecules/userTable";
 import { UserProvider } from "../../context/userContext";
+import { Container } from "@mui/material";
+import UserView from "@/components/organisms/userView";
 
-export default async function Users() {
+export default function Users() {
   return (
     <UserProvider>
-      <UserTable />
+      <Container>
+        <UserView />
+      </Container>
     </UserProvider>
   );
 }

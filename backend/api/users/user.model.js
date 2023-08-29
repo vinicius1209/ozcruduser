@@ -28,6 +28,20 @@ function getById(id) {
   });
 }
 
+function getTotalUsers() {
+  const query = "SELECT COUNT(*) as total FROM user";
+
+  return new Promise((resolve, reject) => {
+    db.get(query, [], (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row.total);
+      }
+    });
+  });
+}
+
 function getAll(pageSize, offSet) {
   const query = "SELECT * FROM user ORDER BY id LIMIT ? OFFSET ?";
 
@@ -85,4 +99,4 @@ function entityExistis(id) {
   });
 }
 
-export { insert, getById, getAll, deleteById, update, entityExistis };
+export { insert, getById, getAll, getTotalUsers, deleteById, update, entityExistis };

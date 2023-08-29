@@ -6,18 +6,23 @@ export const MOCK_SIMPLE_USER = {
   idade: faker.number.int({ min: 18 }),
 };
 
-export const MOCK_LIST_USERS = [
-  {
-    nome: faker.person.fullName(),
-    email: faker.internet.email(),
-    idade: faker.number.int({ min: 18 }),
-  },
-  {
-    nome: faker.person.fullName(),
-    email: faker.internet.email(),
-    idade: faker.number.int({ min: 18 }),
-  },
-];
+export const MOCK_LIST_USERS = {
+  data: [
+    {
+      nome: faker.person.fullName(),
+      email: faker.internet.email(),
+      idade: faker.number.int({ min: 18 }),
+    },
+    {
+      nome: faker.person.fullName(),
+      email: faker.internet.email(),
+      idade: faker.number.int({ min: 18 }),
+    },
+  ],
+  page: 1,
+  pages: 1,
+  pageSize: 10,
+};
 
 export const MOCK_USER_SUCCESS = {
   message: "Usuário criado com sucesso!",
